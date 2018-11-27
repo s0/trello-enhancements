@@ -49,7 +49,7 @@ function refreshCardDisplay(card: JQuery<Element>) {
 function clearCardDisplay(card: JQuery<Element>) {
   if (card.hasClass(HEADER_CLASS)) {
     card.removeClass(HEADER_CLASS);
-    card.find(HEADER_TEXT_CLASS).remove();
+    card.find('.' + HEADER_TEXT_CLASS).remove();
   }
   card.removeClass(BG_CLASS);
   card.removeClass(SINGLE_LABELS_CLASS);
@@ -64,8 +64,43 @@ function refreshAllCards() {
   }
 }
 
+let refreshing = false;
+let refreshTimeout: number = 0;
+const refreshSet = new Set<Element>();
+
+function refreshRequiredCards() {
+  refreshing = true;
+  clearTimeout(refreshTimeout);
+  for (const card of refreshSet) {
+    refreshCardDisplay($(card));
+  }
+  refreshSet.clear();
+  setTimeout(() => {
+    refreshing = false;
+  }, 0);
+}
+
+function requireCardRefresh(card: Element) {
+  refreshSet.add(card);
+  clearTimeout(refreshTimeout);
+  refreshTimeout = setTimeout(refreshRequiredCards, 0);
+}
+
 function init() {
   refreshAllCards();
+
+  // Add mutation observer for cards (so changes can be tracked)
+  const observer = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      if (m.target.parentNode && m.target.parentNode instanceof HTMLElement) {
+        const cardAncestor = m.target.parentNode.closest('.list-card');
+        if (cardAncestor && !refreshing && !cardAncestor.classList.contains('list-card-quick-edit')) {
+          requireCardRefresh(cardAncestor);
+        }
+      }
+    }
+  });
+  observer.observe(document, {attributes: true, childList: true, subtree: true});
 }
 
 init();
