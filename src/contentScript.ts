@@ -92,9 +92,9 @@ function init() {
   // Add mutation observer for cards (so changes can be tracked)
   const observer = new MutationObserver(mutations => {
     for (const m of mutations) {
-      if (m.target.parentNode && m.target.parentNode instanceof HTMLElement) {
-        const cardAncestor = m.target.parentNode.closest('.list-card');
-        if (cardAncestor && !refreshing && !cardAncestor.classList.contains('list-card-quick-edit')) {
+      if (m.target && m.target instanceof HTMLElement) {
+        const cardAncestor = m.target.closest('.list-card');
+        if (cardAncestor && !refreshing && !cardAncestor.classList.contains('list-card-quick-edit') && !cardAncestor.classList.contains('js-composer')) {
           requireCardRefresh(cardAncestor);
         }
       }
