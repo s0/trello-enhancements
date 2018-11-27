@@ -68,6 +68,10 @@ $black: #355263;
 
   &.enhanced-bg {
 
+    &.enhanced-single-label .list-card-labels {
+      display: none !important;
+    }
+
     &.enhanced-color-green {
       background-color: lighten($green, 20%);
     }

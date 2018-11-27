@@ -4,6 +4,7 @@ const COLORS = ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'li
 const HEADER_CLASS = 'enhanced-header';
 const HEADER_TEXT_CLASS = 'enhanced-header-text';
 const BG_CLASS = 'enhanced-bg';
+const SINGLE_LABELS_CLASS = 'enhanced-single-label';
 const COLOR_CLASS_PREFIX = 'enhanced-color-';
 
 const colorClass = (color: string) => COLOR_CLASS_PREFIX + color;
@@ -42,6 +43,7 @@ function refreshCardDisplay(card: JQuery<Element>) {
     card.addClass(BG_CLASS);
     card.addClass(colorClass(color));
   }
+  if (labels.length === 1) card.addClass(SINGLE_LABELS_CLASS);
 }
 
 function clearCardDisplay(card: JQuery<Element>) {
@@ -50,6 +52,7 @@ function clearCardDisplay(card: JQuery<Element>) {
     card.find(HEADER_TEXT_CLASS).remove();
   }
   card.removeClass(BG_CLASS);
+  card.removeClass(SINGLE_LABELS_CLASS);
   for (const color of COLORS) card.removeClass(colorClass(color));
 }
 
