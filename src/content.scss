@@ -1,0 +1,111 @@
+$green: #61bd4f;
+$yellow: #f2d600;
+$orange: #ff9f1a;
+$red: #eb5a46;
+$purple: #c377e0;
+$blue: #0079bf;
+$sky: #00c2e0;
+$lime: #51e898;
+$pink: #ff78cb;
+$black: #355263;
+
+.list-card {
+
+  &.enhanced-header {
+    background: none !important;
+    box-shadow: none !important;
+
+    .list-card-labels, .list-card-title {
+      display: none !important;
+    }
+
+    .enhanced-header-text {
+      text-align: center;
+      font-weight: bold;
+      text-shadow: 1px -1px 1px #fff, -1px -1px 1px #fff, 1px 1px 1px #fff, -1px 1px 1px #fff;
+    }
+
+    &.enhanced-color-green .enhanced-header-text {
+      color: $green;
+    }
+
+    &.enhanced-color-yellow .enhanced-header-text {
+      color: darken($yellow, 10%);
+    }
+
+    &.enhanced-color-orange .enhanced-header-text {
+      color: $orange;
+    }
+
+    &.enhanced-color-red .enhanced-header-text {
+      color: $red;
+    }
+
+    &.enhanced-color-purple .enhanced-header-text {
+      color:$purple;
+    }
+
+    &.enhanced-color-blue .enhanced-header-text {
+      color: $blue;
+    }
+
+    &.enhanced-color-sky .enhanced-header-text {
+      color: $sky;
+    }
+
+    &.enhanced-color-lime .enhanced-header-text {
+      color: $lime;
+    }
+
+    &.enhanced-color-pink .enhanced-header-text {
+      color: $pink;
+    }
+
+    &.enhanced-color-black .enhanced-header-text {
+      color: $black;
+    }
+  }
+
+  &.enhanced-bg {
+
+    &.enhanced-color-green {
+      background-color: lighten($green, 20%);
+    }
+
+    &.enhanced-color-yellow {
+      background-color: lighten($yellow, 20%);
+    }
+
+    &.enhanced-color-orange {
+      background-color: lighten($orange, 30%);
+    }
+
+    &.enhanced-color-red {
+      background-color: lighten($red, 30%);
+    }
+
+    &.enhanced-color-purple {
+      background-color: lighten($purple, 20%);
+    }
+
+    &.enhanced-color-blue {
+      background-color: lighten($blue, 40%);
+    }
+
+    &.enhanced-color-sky {
+      background-color: lighten($sky, 30%);
+    }
+
+    &.enhanced-color-lime {
+      background-color: lighten($lime, 20%);
+    }
+
+    &.enhanced-color-pink {
+      background-color: lighten($pink, 15%);
+    }
+
+    &.enhanced-color-black {
+      background-color: lighten($black, 40%);
+    }
+  }
+}
