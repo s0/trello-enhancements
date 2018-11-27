@@ -1,6 +1,13 @@
 {
   "name": "Visual Enhancements for Trello",
-  "version": "0.1a",
+  "version": "1.0.0",
   "description": "Make trello better to look at!",
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_scripts": [
+   {
+     "matches": ["https://trello.com/*"],
+     "css": ["content.css"],
+     "js": ["jquery.min.js", "contentScript.js"]
+   }
+ ]
 }

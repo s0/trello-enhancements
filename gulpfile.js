@@ -20,13 +20,18 @@ gulp.task('ts', function () {
 });
 
 gulp.task('copy-files', function() {
-  return gulp.src(['src/manifest.json'])
+  return gulp.src(['src/*.json', 'src/*.css'])
+        .pipe(gulp.dest('build/'));
+});
+
+gulp.task('copy-libs', function() {
+  return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
         .pipe(gulp.dest('build/'));
 });
 
 gulp.task('default', function(callback) {
   runSequence(
     'clean',
-    ['ts', 'copy-files'],
+    ['ts', 'copy-files', 'copy-libs'],
     callback);
 });
