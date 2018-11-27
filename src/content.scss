@@ -11,6 +11,10 @@ $black: #355263;
 
 .list-card {
 
+  .enhanced-header-text {
+    display: none;
+  }
+
   &.enhanced-header {
     background: none !important;
     box-shadow: none !important;
@@ -20,6 +24,7 @@ $black: #355263;
     }
 
     .enhanced-header-text {
+      display: block;
       text-align: center;
       font-weight: bold;
       text-shadow: 1px -1px 1px #fff, -1px -1px 1px #fff, 1px 1px 1px #fff, -1px 1px 1px #fff;

@@ -38,7 +38,11 @@ function refreshCardDisplay(card: JQuery<Element>) {
       card.addClass(colorClass(color));
     // Add filtered text component
     const filteredText = title.substr(2, title.length - 4).trim();
-    titleElement.after($(document.createElement('div')).addClass(HEADER_TEXT_CLASS).text(filteredText));
+    let filteredTitleElement = card.find('.' + HEADER_TEXT_CLASS);
+    if (filteredTitleElement.length === 0) {
+      filteredTitleElement = $(document.createElement('div')).addClass(HEADER_TEXT_CLASS).insertAfter(titleElement);
+    }
+    filteredTitleElement.text(filteredText);
   } else if (color) {
     card.addClass(BG_CLASS);
     card.addClass(colorClass(color));
@@ -47,10 +51,7 @@ function refreshCardDisplay(card: JQuery<Element>) {
 }
 
 function clearCardDisplay(card: JQuery<Element>) {
-  if (card.hasClass(HEADER_CLASS)) {
-    card.removeClass(HEADER_CLASS);
-    card.find('.' + HEADER_TEXT_CLASS).remove();
-  }
+  card.removeClass(HEADER_CLASS);
   card.removeClass(BG_CLASS);
   card.removeClass(SINGLE_LABELS_CLASS);
   for (const color of COLORS) card.removeClass(colorClass(color));
@@ -71,6 +72,7 @@ const refreshSet = new Set<Element>();
 function refreshRequiredCards() {
   refreshing = true;
   clearTimeout(refreshTimeout);
+  console.log('refreshing cards', refreshSet);
   for (const card of refreshSet) {
     refreshCardDisplay($(card));
   }
