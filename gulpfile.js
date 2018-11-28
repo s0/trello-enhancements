@@ -34,6 +34,11 @@ gulp.task('copy-files', function() {
         .pipe(gulp.dest('build/'));
 });
 
+gulp.task('copy-icons', function() {
+  return gulp.src(['img/icon*.png'])
+        .pipe(gulp.dest('build/'));
+});
+
 gulp.task('copy-libs', function() {
   return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
         .pipe(gulp.dest('build/'));
@@ -42,7 +47,7 @@ gulp.task('copy-libs', function() {
 gulp.task('default', function(callback) {
   runSequence(
     'clean',
-    ['ts', 'sass', 'copy-files', 'copy-libs'],
+    ['ts', 'sass', 'copy-files', 'copy-icons', 'copy-libs'],
     callback);
 });
 
