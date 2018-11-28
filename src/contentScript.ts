@@ -10,9 +10,10 @@ const COLOR_CLASS_PREFIX = 'enhanced-color-';
 const colorClass = (color: string) => COLOR_CLASS_PREFIX + color;
 
 function getDirectText(node: JQuery<Element>) {
-  return node.contents().filter(function() {
+  const textNode =  node.contents().filter(function() {
     return this.nodeType === 3;
-  })[0].nodeValue;
+  })[0];
+  return textNode ? textNode.nodeValue : null;
 }
 
 function refreshCardDisplay(card: JQuery<Element>) {
