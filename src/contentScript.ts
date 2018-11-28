@@ -10,8 +10,8 @@ const COLOR_CLASS_PREFIX = 'enhanced-color-';
 const colorClass = (color: string) => COLOR_CLASS_PREFIX + color;
 
 function getDirectText(node: JQuery<Element>) {
-  return node.contents().filter(function(){
-    return this.nodeType == 3;
+  return node.contents().filter(function() {
+    return this.nodeType === 3;
   })[0].nodeValue;
 }
 
@@ -33,7 +33,7 @@ function refreshCardDisplay(card: JQuery<Element>) {
   if (title) title = title.trim();
   // Update Display
   if (title && title.startsWith('--') && title.endsWith('--')) {
-    card.addClass(HEADER_CLASS)
+    card.addClass(HEADER_CLASS);
     if (color)
       card.addClass(colorClass(color));
     // Add filtered text component
@@ -66,7 +66,7 @@ function refreshAllCards() {
 }
 
 let refreshing = false;
-let refreshTimeout: number = 0;
+let refreshTimeout = 0;
 const refreshSet = new Set<Element>();
 
 function refreshRequiredCards() {
@@ -77,9 +77,11 @@ function refreshRequiredCards() {
     refreshCardDisplay($(card));
   }
   refreshSet.clear();
-  setTimeout(() => {
-    refreshing = false;
-  }, 0);
+  setTimeout(
+    () => {
+      refreshing = false;
+    },
+    0);
 }
 
 function requireCardRefresh(card: Element) {
@@ -96,7 +98,10 @@ function init() {
     for (const m of mutations) {
       if (m.target && m.target instanceof HTMLElement) {
         const cardAncestor = m.target.closest('.list-card');
-        if (cardAncestor && !refreshing && !cardAncestor.classList.contains('list-card-quick-edit') && !cardAncestor.classList.contains('js-composer')) {
+        if (cardAncestor &&
+          !refreshing &&
+          !cardAncestor.classList.contains('list-card-quick-edit') && !cardAncestor.classList.contains('js-composer')
+        ) {
           requireCardRefresh(cardAncestor);
         }
       }

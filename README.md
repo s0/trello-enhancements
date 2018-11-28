@@ -4,6 +4,9 @@
 
 # Chrome extension for visual enhancements in Trello
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/samlanning/trello-enhancements.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/samlanning/trello-enhancements/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/samlanning/trello-enhancements.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/samlanning/trello-enhancements/context:javascript)
+
 Customize the look of your Trello boards by enabling card background colors (taken from labels) and header cards.
 
 You can try out this extension on the [example board](https://trello.com/b/S3asr5Or/visual-enhancements-demo)
