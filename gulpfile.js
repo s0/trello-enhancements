@@ -4,6 +4,7 @@ var ts = require('gulp-typescript');
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
+var zip = require('gulp-zip');
 
 sass.compiler = require('node-sass');
 
@@ -44,3 +45,9 @@ gulp.task('default', function(callback) {
     ['ts', 'sass', 'copy-files', 'copy-libs'],
     callback);
 });
+
+gulp.task('dist', ['default'], () =>
+	gulp.src('build/*')
+		.pipe(zip('dist.zip'))
+		.pipe(gulp.dest('./'))
+);
