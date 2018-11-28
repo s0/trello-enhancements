@@ -1,5 +1,6 @@
 {
   "rules": {
+    "no-console": [true, "log", "debug"],
     "align": [true, "parameters", "arguments", "statements"],
     "class-name": true,
     "comment-format": [true, "check-space"],

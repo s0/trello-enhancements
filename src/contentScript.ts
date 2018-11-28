@@ -73,7 +73,6 @@ const refreshSet = new Set<Element>();
 function refreshRequiredCards() {
   refreshing = true;
   clearTimeout(refreshTimeout);
-  console.log('refreshing cards', refreshSet);
   for (const card of refreshSet) {
     refreshCardDisplay($(card));
   }
