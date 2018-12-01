@@ -11,7 +11,7 @@
    {
      "matches": ["https://trello.com/*"],
      "css": ["content.css"],
-     "js": ["jquery.min.js", "contentScript.js"]
+     "js": ["contentScript.js"]
    }
  ]
 }

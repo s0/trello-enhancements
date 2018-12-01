@@ -11,32 +11,31 @@ type AttrMode =
 const ATTR_MODE = 'enhanced-mode';
 const ATTR_COLOR = 'enhanced-color';
 
-// const HEADER_CLASS = 'enhanced-header';
 const HEADER_TEXT_CLASS = 'enhanced-header-text';
-// const BG_CLASS = 'enhanced-bg';
-// const SINGLE_LABELS_CLASS = 'enhanced-single-label';
-// const COLOR_CLASS_PREFIX = 'enhanced-color-';
 
-function getDirectText(node: JQuery<Element>) {
-  const textNode =  node.contents().filter(function() {
-    return this.nodeType === 3;
-  })[0];
-  return textNode ? textNode.nodeValue : null;
+function getDirectText(node: Element) {
+  if (!node) return null;
+  for (const c of node.childNodes) {
+    if (c.nodeType === 3)
+      return c.nodeValue;
+  }
+  return null;
 }
 
-function refreshCardDisplay(card: JQuery<Element>) {
+function refreshCardDisplay(card: Element) {
   // Get the first label color used
-  const labels = card.find('.list-card-labels .card-label');
-  let color: null | string = null;
+  const labelContainer = card.getElementsByClassName('list-card-labels')[0];
+  const labels = labelContainer ? labelContainer.children : [];
+  let color = '';
   if (labels.length > 0) {
-    const firstLabel = $(labels.get(0));
+    const firstLabel = labels[0];
     for (const c of COLORS) {
-      if (firstLabel.hasClass(`card-label-${c}`))
+      if (firstLabel.classList.contains(`card-label-${c}`))
         color = c;
     }
   }
   // Get the text content of the card
-  const titleElement = card.find('.list-card-title');
+  const titleElement = card.getElementsByClassName('list-card-title')[0];
   let title = getDirectText(titleElement);
   if (title) title = title.trim();
   // Update Display
@@ -45,24 +44,27 @@ function refreshCardDisplay(card: JQuery<Element>) {
     mode = 'header';
     // Add filtered text component
     const filteredText = title.substr(2, title.length - 4).trim();
-    let filteredTitleElement = card.find('.' + HEADER_TEXT_CLASS);
-    if (filteredTitleElement.length === 0) {
-      filteredTitleElement = $(document.createElement('div')).addClass(HEADER_TEXT_CLASS).insertAfter(titleElement);
+    let filteredTitleElement = card.getElementsByClassName(HEADER_TEXT_CLASS)[0];
+    if (!filteredTitleElement && titleElement.parentNode) {
+      filteredTitleElement = document.createElement('div');
+      filteredTitleElement.classList.add(HEADER_TEXT_CLASS);
+      titleElement.parentNode.insertBefore(filteredTitleElement, titleElement);
     }
-    filteredTitleElement.text(filteredText);
+    filteredTitleElement.textContent = filteredText;
   } else if (labels.length !== 1) {
     mode = 'single-label';
   }
-  // Set attributes
-  card.attr(ATTR_MODE, mode);
-  card.attr(ATTR_COLOR, color);
+  if (card.getAttribute(ATTR_MODE) !== mode)
+    card.setAttribute(ATTR_MODE, mode);
+  if (card.getAttribute(ATTR_COLOR) !== color)
+    card.setAttribute(ATTR_COLOR, color);
 }
 
 function refreshAllCards() {
   document.getElementsByClassName('list-card');
   const allCards = document.getElementsByClassName('list-card');
   for (let i = 0; i < allCards.length; i++) {
-    refreshCardDisplay($(allCards[i]));
+    refreshCardDisplay(allCards[i]);
   }
 }
 
@@ -74,7 +76,7 @@ function refreshRequiredCards() {
   refreshing = true;
   clearTimeout(refreshTimeout);
   for (const card of refreshSet) {
-    refreshCardDisplay($(card));
+    refreshCardDisplay(card);
   }
   refreshSet.clear();
   setTimeout(
