@@ -15,7 +15,7 @@ $black: #355263;
     display: none;
   }
 
-  &.enhanced-header {
+  &[enhanced-mode="header"] {
     background: none !important;
     box-shadow: none !important;
 
@@ -30,90 +30,90 @@ $black: #355263;
       text-shadow: 1px -1px 1px #fff, -1px -1px 1px #fff, 1px 1px 1px #fff, -1px 1px 1px #fff;
     }
 
-    &.enhanced-color-green .enhanced-header-text {
+    &[enhanced-color="green"] .enhanced-header-text {
       color: $green;
     }
 
-    &.enhanced-color-yellow .enhanced-header-text {
+    &[enhanced-color="yellow"] .enhanced-header-text {
       color: darken($yellow, 10%);
     }
 
-    &.enhanced-color-orange .enhanced-header-text {
+    &[enhanced-color="orange"] .enhanced-header-text {
       color: $orange;
     }
 
-    &.enhanced-color-red .enhanced-header-text {
+    &[enhanced-color="red"] .enhanced-header-text {
       color: $red;
     }
 
-    &.enhanced-color-purple .enhanced-header-text {
-      color:$purple;
+    &[enhanced-color="purple"] .enhanced-header-text {
+      color: $purple;
     }
 
-    &.enhanced-color-blue .enhanced-header-text {
+    &[enhanced-color="blue"] .enhanced-header-text {
       color: $blue;
     }
 
-    &.enhanced-color-sky .enhanced-header-text {
+    &[enhanced-color="sky"] .enhanced-header-text {
       color: $sky;
     }
 
-    &.enhanced-color-lime .enhanced-header-text {
+    &[enhanced-color="lime"] .enhanced-header-text {
       color: $lime;
     }
 
-    &.enhanced-color-pink .enhanced-header-text {
+    &[enhanced-color="pink"] .enhanced-header-text {
       color: $pink;
     }
 
-    &.enhanced-color-black .enhanced-header-text {
+    &[enhanced-color="black"] .enhanced-header-text {
       color: $black;
     }
   }
 
-  &.enhanced-bg {
+  &[enhanced-mode="normal"] .list-card-labels {
+    display: none !important;
+  }
 
-    &.enhanced-single-label .list-card-labels {
-      display: none !important;
-    }
+  &[enhanced-mode="single-label"], &[enhanced-mode="normal"] {
 
-    &.enhanced-color-green {
+    &[enhanced-color="green"] {
       background-color: lighten($green, 20%);
     }
 
-    &.enhanced-color-yellow {
+    &[enhanced-color="yellow"] {
       background-color: lighten($yellow, 20%);
     }
 
-    &.enhanced-color-orange {
+    &[enhanced-color="orange"] {
       background-color: lighten($orange, 30%);
     }
 
-    &.enhanced-color-red {
+    &[enhanced-color="red"] {
       background-color: lighten($red, 30%);
     }
 
-    &.enhanced-color-purple {
+    &[enhanced-color="purple"] {
       background-color: lighten($purple, 20%);
     }
 
-    &.enhanced-color-blue {
+    &[enhanced-color="blue"] {
       background-color: lighten($blue, 40%);
     }
 
-    &.enhanced-color-sky {
+    &[enhanced-color="sky"] {
       background-color: lighten($sky, 30%);
     }
 
-    &.enhanced-color-lime {
+     &[enhanced-color="lime"] {
       background-color: lighten($lime, 20%);
     }
 
-    &.enhanced-color-pink {
+    &[enhanced-color="pink"] {
       background-color: lighten($pink, 15%);
     }
 
-    &.enhanced-color-black {
+    &[enhanced-color="black"] {
       background-color: lighten($black, 40%);
     }
   }

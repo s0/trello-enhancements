@@ -1,13 +1,21 @@
 
 const COLORS = ['green', 'yellow', 'orange', 'red', 'purple', 'blue', 'sky', 'lime', 'pink', 'black'];
 
-const HEADER_CLASS = 'enhanced-header';
-const HEADER_TEXT_CLASS = 'enhanced-header-text';
-const BG_CLASS = 'enhanced-bg';
-const SINGLE_LABELS_CLASS = 'enhanced-single-label';
-const COLOR_CLASS_PREFIX = 'enhanced-color-';
+type AttrMode =
+  // Display in a header mode, and hide all labels, regardless of count
+  'header' |
+  // A single label is in use, so use its colour as background and hide it
+  'single-label' |
+  // Use background color if possible, but keep labels visible
+  'normal';
+const ATTR_MODE = 'enhanced-mode';
+const ATTR_COLOR = 'enhanced-color';
 
-const colorClass = (color: string) => COLOR_CLASS_PREFIX + color;
+// const HEADER_CLASS = 'enhanced-header';
+const HEADER_TEXT_CLASS = 'enhanced-header-text';
+// const BG_CLASS = 'enhanced-bg';
+// const SINGLE_LABELS_CLASS = 'enhanced-single-label';
+// const COLOR_CLASS_PREFIX = 'enhanced-color-';
 
 function getDirectText(node: JQuery<Element>) {
   const textNode =  node.contents().filter(function() {
@@ -17,7 +25,6 @@ function getDirectText(node: JQuery<Element>) {
 }
 
 function refreshCardDisplay(card: JQuery<Element>) {
-  clearCardDisplay(card);
   // Get the first label color used
   const labels = card.find('.list-card-labels .card-label');
   let color: null | string = null;
@@ -33,10 +40,9 @@ function refreshCardDisplay(card: JQuery<Element>) {
   let title = getDirectText(titleElement);
   if (title) title = title.trim();
   // Update Display
+  let mode: AttrMode = 'normal';
   if (title && title.startsWith('--') && title.endsWith('--')) {
-    card.addClass(HEADER_CLASS);
-    if (color)
-      card.addClass(colorClass(color));
+    mode = 'header';
     // Add filtered text component
     const filteredText = title.substr(2, title.length - 4).trim();
     let filteredTitleElement = card.find('.' + HEADER_TEXT_CLASS);
@@ -44,18 +50,12 @@ function refreshCardDisplay(card: JQuery<Element>) {
       filteredTitleElement = $(document.createElement('div')).addClass(HEADER_TEXT_CLASS).insertAfter(titleElement);
     }
     filteredTitleElement.text(filteredText);
-  } else if (color) {
-    card.addClass(BG_CLASS);
-    card.addClass(colorClass(color));
+  } else if (labels.length !== 1) {
+    mode = 'single-label';
   }
-  if (labels.length === 1) card.addClass(SINGLE_LABELS_CLASS);
-}
-
-function clearCardDisplay(card: JQuery<Element>) {
-  card.removeClass(HEADER_CLASS);
-  card.removeClass(BG_CLASS);
-  card.removeClass(SINGLE_LABELS_CLASS);
-  for (const color of COLORS) card.removeClass(colorClass(color));
+  // Set attributes
+  card.attr(ATTR_MODE, mode);
+  card.attr(ATTR_COLOR, color);
 }
 
 function refreshAllCards() {
