@@ -19,6 +19,10 @@ $black: #355263;
     background: none !important;
     box-shadow: none !important;
 
+    &:hover {
+      opacity: 0.7;
+    }
+
     .list-card-labels, .list-card-title {
       display: none !important;
     }
@@ -79,42 +83,82 @@ $black: #355263;
 
     &[enhanced-color="green"] {
       background-color: lighten($green, 20%);
+
+      &:hover {
+        background-color: lighten($green, 15%);
+      }
     }
 
     &[enhanced-color="yellow"] {
-      background-color: lighten($yellow, 20%);
+      background-color: lighten($yellow, 25%);
+
+      &:hover {
+        background-color: lighten($yellow, 20%);
+      }
     }
 
     &[enhanced-color="orange"] {
-      background-color: lighten($orange, 30%);
+      background-color: lighten($orange, 25%);
+
+      &:hover {
+        background-color: lighten($orange, 20%);
+      }
     }
 
     &[enhanced-color="red"] {
-      background-color: lighten($red, 30%);
+      background-color: lighten($red, 25%);
+
+      &:hover {
+        background-color: lighten($red, 20%);
+      }
     }
 
     &[enhanced-color="purple"] {
-      background-color: lighten($purple, 20%);
+      background-color: lighten($purple, 15%);
+
+      &:hover {
+        background-color: lighten($purple, 10%);
+      }
     }
 
     &[enhanced-color="blue"] {
       background-color: lighten($blue, 40%);
+
+      &:hover {
+        background-color: lighten($blue, 35%);
+      }
     }
 
     &[enhanced-color="sky"] {
       background-color: lighten($sky, 30%);
+
+      &:hover {
+        background-color: lighten($sky, 25%);
+      }
     }
 
      &[enhanced-color="lime"] {
       background-color: lighten($lime, 20%);
+
+      &:hover {
+        background-color: lighten($lime, 15%);
+      }
     }
 
     &[enhanced-color="pink"] {
       background-color: lighten($pink, 15%);
+
+      &:hover {
+        background-color: lighten($pink, 10%);
+      }
     }
 
     &[enhanced-color="black"] {
       background-color: lighten($black, 40%);
+
+      &:hover {
+        background-color: lighten($black, 35%);
+      }
     }
   }
 }

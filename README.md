@@ -30,13 +30,8 @@ otherwise you'll still be able to see all the labels displayed.
 
 ## Development TODO:
 
-*Known Bugs:*
-* attributes get removed after a card is dropped
-
 *Other:*
 
 * Introduce global settings
 * Introduce per-board settings
 * Activate content script sooner (rather than when idle) so that styles can be applied as soon as cards are displayed.
-* Fixup colours a little more (make yellow less intense, maybe green?)
-* Add a mouseover effect
