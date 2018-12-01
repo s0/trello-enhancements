@@ -58,14 +58,31 @@ function refreshCardDisplay(card: Element) {
     card.setAttribute(ATTR_MODE, mode);
   if (card.getAttribute(ATTR_COLOR) !== color)
     card.setAttribute(ATTR_COLOR, color);
+  requireCheckForUnstyledCards();
 }
 
 function refreshAllCards() {
-  document.getElementsByClassName('list-card');
   const allCards = document.getElementsByClassName('list-card');
   for (let i = 0; i < allCards.length; i++) {
     refreshCardDisplay(allCards[i]);
   }
+}
+
+let checkForUnstyledCardsRequest = 0;
+
+function checkForUnstyledCards() {
+  const allCards = document.getElementsByClassName('list-card');
+  for (let i = 0; i < allCards.length; i++) {
+    const mode = allCards[i].getAttribute(ATTR_MODE);
+    if (!mode) {
+      refreshCardDisplay(allCards[i]);
+    }
+  }
+}
+
+function requireCheckForUnstyledCards() {
+  cancelAnimationFrame(checkForUnstyledCardsRequest);
+  checkForUnstyledCardsRequest = requestAnimationFrame(checkForUnstyledCards);
 }
 
 let refreshTimeout = 0;
@@ -76,7 +93,6 @@ function refreshRequiredCards() {
   for (const card of refreshSet) {
     refreshCardDisplay(card);
   }
-  console.log('refresh', refreshSet);
   refreshSet.clear();
 }
 
