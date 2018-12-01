@@ -68,22 +68,16 @@ function refreshAllCards() {
   }
 }
 
-let refreshing = false;
 let refreshTimeout = 0;
 const refreshSet = new Set<Element>();
 
 function refreshRequiredCards() {
-  refreshing = true;
   clearTimeout(refreshTimeout);
   for (const card of refreshSet) {
     refreshCardDisplay(card);
   }
+  console.log('refresh', refreshSet);
   refreshSet.clear();
-  setTimeout(
-    () => {
-      refreshing = false;
-    },
-    0);
 }
 
 function requireCardRefresh(card: Element) {
@@ -101,7 +95,6 @@ function init() {
       if (m.target && m.target instanceof HTMLElement) {
         const cardAncestor = m.target.closest('.list-card');
         if (cardAncestor &&
-          !refreshing &&
           !cardAncestor.classList.contains('list-card-quick-edit') && !cardAncestor.classList.contains('js-composer')
         ) {
           requireCardRefresh(cardAncestor);
