@@ -31,12 +31,10 @@ otherwise you'll still be able to see all the labels displayed.
 ## Development TODO:
 
 *Known Bugs:*
-* classes get removed after a card is dropped (maybe use other attrs instead?)
+* attributes get removed after a card is dropped
 
 *Other:*
 
-* More efficient class manipulation of cards to prevent DOM manipulation (manipulate only when necessary)
-* Remove use of refreshing Boolean flag and unnecessary `setTimeout` after mutation observer doesn't fire when no changes have been made to card
 * Introduce global settings
 * Introduce per-board settings
 * Activate content script sooner (rather than when idle) so that styles can be applied as soon as cards are displayed.
