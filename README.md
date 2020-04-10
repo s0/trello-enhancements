@@ -25,8 +25,7 @@ color for the header text
 ### Background Colors
 
 If this card has a label, then the background color will be based on the color
-of the first label. If you only have one label, then that label will be hidden,
-otherwise you'll still be able to see all the labels displayed.
+of the first label.
 
 ## Development TODO:
 
